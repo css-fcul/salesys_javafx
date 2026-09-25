@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sale Details — SaleSys</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+  <h1>Sale <span th:text="${sale.id}">1</span></h1>
+  
+  <div th:if="${message}" class="message" th:text="${message}"></div>
+  <div th:if="${error}" class="error" th:text="${error}"></div>
+  
+  <p>
+    <b>Date:</b> <span th:text="${sale.date}">2025-01-01</span>
+    &nbsp;|&nbsp; <b>Status:</b> <span th:text="${sale.status}">OPEN</span>
+    &nbsp;|&nbsp; <b>Total:</b> <span th:text="${sale.totalAmount}">0.00</span>
+  </p>
+  
+  <h2>Items</h2>
+  <div th:if="${sale.saleProducts == null or #lists.isEmpty(sale.saleProducts)}" class="muted">No items yet.</div>
+  <table th:if="${sale.saleProducts != null and !#lists.isEmpty(sale.saleProducts)}">
+    <thead>
+      <tr>
+        <th>Product Code</th>
+        <th>Quantity</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="i : ${sale.saleProducts}">
+        <td th:text="${i.productCode}">1001</td>
+        <td th:text="${i.quantity}">1</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <h3>Add Product</h3>
+  <form th:action="@{'/web/sales/' + ${sale.id} + '/product'}" method="post">
+    <div class="row">
+      <div>
+        <label for="productCode">Product</label>
+        <select id="productCode" name="productCode" required>
+          <option value="">-- Select Product --</option>
+          <option th:each="p : ${products}" th:value="${p.code}" th:text="${p.code + ' - ' + p.description + ' ($' + p.faceValue + ', Stock: ' + p.stockQuantity + ')'}"></option>
+        </select>
+      </div>
+      <div>
+        <label for="quantity">Quantity</label>
+        <br/>
+        <input id="quantity" name="quantity" type="number" step="1" min="1" required />
+      </div>
+    </div>
+    <button type="submit">Add</button>
+  </form>
+  
+  <div class="actions">
+    <form th:if="${saleOpen}" th:action="@{'/web/sales/' + ${sale.id} + '/close'}" method="post">
+      <button type="submit">Close Sale</button>
+    </form>
+    <a class="btn" href="/web/sales">Back to Sales</a>
+    <a class="btn" href="/">Home</a>
+  </div>
+</body>
+</html>

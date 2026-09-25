@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sales — SaleSys</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+  <h1>Sales 🧾</h1>
+  <div th:if="${message}" class="message" th:text="${message}"></div>
+  <div th:if="${error}" class="error" th:text="${error}"></div>
+  
+  <div th:if="${#lists.isEmpty(sales)}" class="muted">No sales yet.</div>
+  
+  <table th:if="${!#lists.isEmpty(sales)}">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Date</th>
+        <th>Status</th>
+        <th>Total</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="s : ${sales}">
+        <td th:text="${s.id}"></td>
+        <td th:text="${s.date}"></td>
+        <td th:text="${s.status}"></td>
+        <td th:text="${s.totalAmount}"></td>
+        <td><a th:href="@{'/web/sales/' + ${s.id}}"></a></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <p class="actions">
+    <a class="btn" href="/web/sales/new">+ New Sale</a>
+    <a class="btn" href="/">← Back to Home</a>
+  </p>
+</body>
+</html>

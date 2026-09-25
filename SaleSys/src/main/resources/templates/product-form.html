@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>New Product — SaleSys</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+  <h1>New Product</h1>
+  <div th:if="${error}" class="error" th:text="${error}">Error goes here</div>
+  
+  <form th:action="@{/web/products}" method="post">
+    <div>
+      <label for="code">Code</label>
+      <br/>
+      <input id="code" name="code" type="number" min="1" step="1" required />
+    </div>
+    
+    <div>
+      <label for="description">Description</label>
+      <br/>
+      <input id="description" name="description" type="text" maxlength="255" required />
+    </div>
+    
+    <div class="row">
+      <div>
+        <label for="faceValue">Face Value</label>
+        <br/>
+        <input id="faceValue" name="faceValue" type="number" step="0.01" min="0.01" required />
+      </div>
+      <div>
+        <label for="stockQuantity">Stock</label>
+        <br/>
+        <input id="stockQuantity" name="stockQuantity" type="number" step="1" min="0" required />
+      </div>
+    </div>
+    
+    <div class="actions">
+      <button type="submit">Create</button>
+      <a class="btn" href="/web/products">Cancel</a>
+    </div>
+  </form>
+  
+  <p class="actions"><a class="btn" href="/">← Back to Home</a></p>
+</body>
+</html>

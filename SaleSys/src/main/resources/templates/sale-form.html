@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>New Sale — SaleSys</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+  <h1>New Sale</h1>
+  <div th:if="${error}" class="error" th:text="${error}"></div>
+  
+  <form th:action="@{/web/sales}" method="post">
+    <div>
+      <label for="vat">Customer VAT (9 digits)</label>
+      <br/>
+      <input id="vat" name="vat" type="text" pattern="\d{9}" maxlength="9" required />
+    </div>
+    
+    <div class="actions">
+      <button type="submit">Create</button>
+      <a class="btn" href="/web/sales">Cancel</a>
+    </div>
+  </form>
+  
+  <p class="actions"><a class="btn" href="/">← Back to Home</a></p>
+</body>
+</html>

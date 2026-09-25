@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title th:text="${appName} + ' — Home'">SaleSys — Home</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+  <h1 th:text="${appName}">SaleSys</h1>
+  <p>Welcome to SaleSys!</p>
+  
+  <div class="cards">
+    <a class="card" href="/web/products" aria-label="Products">
+      <span class="icon" role="img" aria-hidden="true">📦</span>
+      <span class="label">Products</span>
+    </a>
+    <a class="card" href="/web/customers" aria-label="Customers">
+      <span class="icon" role="img" aria-hidden="true">👤</span>
+      <span class="label">Customers</span>
+    </a>
+    <a class="card" href="/web/sales" aria-label="Sales">
+      <span class="icon" role="img" aria-hidden="true">🧾</span>
+      <span class="label">Sales</span>
+    </a>
+  </div>
+</body>
+</html>

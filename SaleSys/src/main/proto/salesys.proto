@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+package salesys;
+
+option java_package = "pt.ul.fc.css.salesys.grpc";
+option java_multiple_files = true;
+option java_outer_classname = "SaleSysProto";
+
+service SaleSysService {
+
+  rpc CreateCustomer (CustomerRequest) returns (CustomerResponse);
+  rpc GetAllCustomers (Empty) returns (CustomerListResponse);
+  rpc GetProductsByVat (VatRequest) returns (SaleProductListResponse);
+  rpc CreateSale (VatRequest) returns (SaleResponse);
+  // adicionar rpc do AddProduct
+}
+
+message Empty {}
+
+message VatRequest {
+  string vat = 1;
+}
+
+message CustomerRequest {
+  string designation = 1;
+  string phone       = 2;
+  string vat_number  = 3;
+}
+
+message CustomerResponse {
+  int64  id          = 1;
+  string designation = 2;
+  string phone       = 3;
+  string vat_number  = 4;
+}
+
+message CustomerListResponse {
+  repeated CustomerResponse customers = 1;
+}
+
+
+message SaleResponse {
+  int64  id           = 1;
+  string date         = 2;
+  double total_amount = 3;
+  string status       = 4;
+}
+
+message SaleProductItem {
+  int32 product_code = 1;
+  int32 quantity     = 2;
+}
+
+message SaleProductListResponse {
+  repeated SaleProductItem items = 1;
+}
+
+// Product (TODO)
+
+message ProductRequest {
+}
+
+message ProductResponse {
+}
